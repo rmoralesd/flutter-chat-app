@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/widgets/custom_input.dart';
+
+import 'labels.dart';
+import 'logo.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -9,9 +13,9 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              _Logo(),
+              Logo(),
               _Form(),
-              _Labels(),
+              Labels(),
               Text(
                 'Términos y condiciones de uso',
                 style: TextStyle(fontWeight: FontWeight.w200),
@@ -19,32 +23,6 @@ class LoginPage extends StatelessWidget {
             ],
           ),
         ));
-  }
-}
-
-class _Logo extends StatelessWidget {
-  const _Logo({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        margin: const EdgeInsets.only(top: 50),
-        width: 170,
-        child: Column(
-          children: const [
-            Image(image: AssetImage('assets/tag-logo.png')),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Messenger',
-              style: TextStyle(fontSize: 30),
-            )
-          ],
-        ),
-      ),
-    );
   }
 }
 
@@ -56,43 +34,28 @@ class _Form extends StatefulWidget {
 }
 
 class __FormState extends State<_Form> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const TextField(),
-        const TextField(),
-        RaisedButton(onPressed: () {})
-      ],
-    );
-  }
-}
-
-class _Labels extends StatelessWidget {
-  const _Labels({Key key}) : super(key: key);
+  final emailCtrl = TextEditingController();
+  final passCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 50),
       child: Column(
         children: [
-          Text(
-            '¿No tienes cuenta',
-            style: TextStyle(
-              color: Colors.black54,
-              fontSize: 15,
-            ),
+          CustomInput(
+            icon: Icons.mail_outline,
+            placeHolder: 'Correo',
+            keyBoardType: TextInputType.emailAddress,
+            textController: emailCtrl,
           ),
-          SizedBox(
-            height: 10,
+          CustomInput(
+            icon: Icons.lock_outline,
+            placeHolder: 'Contraseña',
+            textController: passCtrl,
+            isPassword: true,
           ),
-          Text(
-            'Crea una ahora',
-            style: TextStyle(
-                color: Colors.blue[600],
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
-          )
         ],
       ),
     );
