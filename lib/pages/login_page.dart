@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/widgets/custom_button.dart';
 import 'package:flutter_chat_app/widgets/custom_input.dart';
 
 import 'labels.dart';
@@ -56,6 +57,11 @@ class __FormState extends State<_Form> {
             textController: passCtrl,
             isPassword: true,
           ),
+          CustomButton(
+            onPressed: () {
+              print("call");
+            },
+          )
         ],
       ),
     );
