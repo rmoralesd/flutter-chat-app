@@ -67,8 +67,8 @@ class _UsuariosPageState extends State<UsuariosPage> {
     );
   }
 
-  _cargarUsuario() async {
-    await Future.delayed(Duration(milliseconds: 1000));
+  Future<dynamic> _cargarUsuario() async {
+    await Future.delayed(const Duration(milliseconds: 1000));
     _refreshController.refreshCompleted();
   }
 }
@@ -87,8 +87,8 @@ class _UserView extends StatelessWidget {
       title: Text(usuario.nombre),
       subtitle: Text(usuario.email),
       leading: CircleAvatar(
-        child: Text(usuario.nombre.substring(0, 2)),
         backgroundColor: Colors.blue[100],
+        child: Text(usuario.nombre.substring(0, 2)),
       ),
       trailing: Container(
         width: 10,

@@ -59,7 +59,7 @@ class __FormState extends State<_Form> {
           CustomInput(
             icon: Icons.mail_outline,
             placeHolder: 'Nombre',
-            keyBoardType: TextInputType.text,
+            //keyBoardType: TextInputType.text,
             textController: nameCtrl,
           ),
           CustomInput(
