@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/helpers/mostrar_alerta.dart';
 import 'package:flutter_chat_app/services/auth_service.dart';
 import 'package:flutter_chat_app/widgets/custom_button.dart';
 import 'package:flutter_chat_app/widgets/custom_input.dart';
@@ -52,6 +53,8 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context, listen: true);
+
     return Container(
       margin: const EdgeInsets.only(top: 40),
       padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -70,13 +73,19 @@ class __FormState extends State<_Form> {
             isPassword: true,
           ),
           CustomButton(
-            onPressed: () {
-              print(emailCtrl.text);
-              print(passCtrl.text);
-              final authService =
-                  Provider.of<AuthService>(context, listen: false);
-              authService.login(emailCtrl.text, passCtrl.text);
-            },
+            onPressed: authService.autenticando
+                ? null
+                : () async {
+                    FocusScope.of(context)
+                        .unfocus(); //Oculta el teclado si está activo
+                    final loginOk = await authService.login(
+                        emailCtrl.text.trim(), passCtrl.text.trim());
+
+                    if (!loginOk) {
+                      mostrarAlerta(context, 'Login incorrecto',
+                          'Revisar email y password');
+                    }
+                  },
             text: 'Ingrese',
           )
         ],
