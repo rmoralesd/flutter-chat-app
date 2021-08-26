@@ -21,7 +21,7 @@ Future<dynamic> mostrarAlerta(
     );
   }
 
-  showCupertinoDialog(
+  return showCupertinoDialog(
       context: context,
       builder: (_) => CupertinoAlertDialog(
             title: Text(titulo),

@@ -84,6 +84,8 @@ class __FormState extends State<_Form> {
                     if (!loginOk) {
                       mostrarAlerta(context, 'Login incorrecto',
                           'Revisar email y password');
+                    } else {
+                      Navigator.pushReplacementNamed(context, 'usuario');
                     }
                   },
             text: 'Ingrese',
