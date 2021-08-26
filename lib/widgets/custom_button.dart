@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   //final void Function onPressed();
   final VoidCallback onPressed;
+  final String text;
 
   const CustomButton({
     Key key,
     @required this.onPressed,
+    @required this.text,
   }) : super(key: key);
 
   @override
@@ -21,9 +23,9 @@ class CustomButton extends StatelessWidget {
       child: Container(
           width: double.infinity,
           height: 55,
-          child: const Center(
+          child: Center(
             child: Text(
-              'Ingrese',
+              text,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
