@@ -11,7 +11,7 @@ class AuthService with ChangeNotifier {
   Usuario usuario;
   bool _autenticando = false;
 
-  final _storage = new FlutterSecureStorage();
+  final _storage = const FlutterSecureStorage();
 
   bool get autenticando => _autenticando;
   set autenticando(bool value) {
