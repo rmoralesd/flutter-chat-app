@@ -47,10 +47,9 @@ class _UsuariosPageState extends State<UsuariosPage> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
-            child: const Icon(
-              Icons.check_circle,
-              color: Colors.red,
-            ),
+            child: (socketService.serverStatus == ServerStatus.Online)
+                ? const Icon(Icons.check_circle, color: Colors.blue)
+                : const Icon(Icons.check_circle, color: Colors.red),
           )
         ],
       ),
