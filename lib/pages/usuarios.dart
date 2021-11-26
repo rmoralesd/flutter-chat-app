@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/models/usuario.dart';
 import 'package:flutter_chat_app/services/auth_service.dart';
 import 'package:flutter_chat_app/services/socket_service.dart';
+import 'package:flutter_chat_app/services/usuarios_service.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -12,12 +13,16 @@ class UsuariosPage extends StatefulWidget {
 
 class _UsuariosPageState extends State<UsuariosPage> {
   final RefreshController _refreshController = RefreshController();
-  final usuarios = [
-    Usuario(uid: '1', nombre: 'Ricardo', email: 'test@test.com', online: true),
-    Usuario(uid: '2', nombre: 'Morales', email: 'test@test.com', online: true),
-    Usuario(
-        uid: '2', nombre: 'Dominguez', email: 'test@test.com', online: false),
-  ];
+  final usuarioService = UsuariosService();
+
+  List<Usuario> usuarios = [];
+
+  @override
+  void initState() {
+    _cargarUsuarios();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
@@ -55,7 +60,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
       ),
       body: SmartRefresher(
         controller: _refreshController,
-        onRefresh: _cargarUsuario,
+        onRefresh: _cargarUsuarios,
         header: WaterDropHeader(
           complete: Icon(
             Icons.check,
@@ -78,8 +83,11 @@ class _UsuariosPageState extends State<UsuariosPage> {
     );
   }
 
-  Future<dynamic> _cargarUsuario() async {
-    await Future.delayed(const Duration(milliseconds: 1000));
+  Future<dynamic> _cargarUsuarios() async {
+    //await Future.delayed(const Duration(milliseconds: 1000));
+
+    usuarios = await usuarioService.getUsuarios();
+    setState(() {});
     _refreshController.refreshCompleted();
   }
 }
