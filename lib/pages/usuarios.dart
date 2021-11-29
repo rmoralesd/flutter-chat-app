@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/models/usuario.dart';
 import 'package:flutter_chat_app/services/auth_service.dart';
+import 'package:flutter_chat_app/services/chat_service.dart';
 import 'package:flutter_chat_app/services/socket_service.dart';
 import 'package:flutter_chat_app/services/usuarios_service.dart';
 import 'package:provider/provider.dart';
@@ -116,6 +117,11 @@ class _UserView extends StatelessWidget {
             color: usuario.online ? Colors.green[300] : Colors.red,
             borderRadius: BorderRadius.circular(100)),
       ),
+      onTap: () {
+        final chatService = Provider.of<ChatService>(context, listen: false);
+        chatService.usuarioPara = usuario;
+        Navigator.pushNamed(context, 'chat');
+      },
     );
   }
 }

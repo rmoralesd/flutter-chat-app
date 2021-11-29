@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/services/chat_service.dart';
 import 'package:flutter_chat_app/widgets/chat_message.dart';
+import 'package:provider/provider.dart';
 
 class ChatPage extends StatefulWidget {
   @override
@@ -13,51 +15,32 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final _textController = TextEditingController();
   final _focusNode = FocusNode();
   bool _estaEscribiendo = false;
-  final List<ChatMessage> _messages = [
-    // ChatMessage(
-    //   uid: '123',
-    //   texto: 'Hola mundo',
-    // ),
-    // ChatMessage(
-    //   uid: '123',
-    //   texto: 'Hola mundo',
-    // ),
-    // ChatMessage(
-    //   uid: '124',
-    //   texto: 'Hola mundo',
-    // ),
-    // ChatMessage(
-    //   uid: '123',
-    //   texto: 'Hola mundo',
-    // ),
-    // ChatMessage(
-    //   uid: '124',
-    //   texto: 'Hola mundo',
-    // )
-  ];
+  final List<ChatMessage> _messages = [];
   @override
   Widget build(BuildContext context) {
+    final chatService = Provider.of<ChatService>(context);
+    final usuarioPara = chatService.usuarioPara;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         elevation: 1,
         backgroundColor: Colors.white,
         title: Column(
-          children: const [
+          children: [
             CircleAvatar(
               backgroundColor: Colors.blueAccent,
               maxRadius: 14,
               child: Text(
-                'Te',
-                style: TextStyle(fontSize: 12),
+                usuarioPara.nombre.substring(0, 2),
+                style: const TextStyle(fontSize: 12),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
             Text(
-              'Ricardo Morales',
-              style: TextStyle(color: Colors.black87, fontSize: 12),
+              usuarioPara.nombre,
+              style: const TextStyle(color: Colors.black87, fontSize: 12),
             )
           ],
         ),
